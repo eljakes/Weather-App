@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
-const validCities = ['New York', 'London', 'Tokyo', 'Paris', 'Berlin', 'Accra', 'Ghana', 'Texas', 'Nigeria', 'Manchester'];
+const validCities = ['New York', 'Accra', 'Lagos', 'Nairobi', 'Cape Town', 'Beirut', 'Dallas', 'London', 'Tokyo', 'Paris', 'Berlin'];
 
 const App = () => {
   const [city, setCity] = useState('');
@@ -35,13 +35,37 @@ const App = () => {
     fetchData();
   }, [city]);
 
+  const getWeatherIcon = () => {
+    if (!weatherData || !weatherData.weather || weatherData.weather.length === 0) {
+      return '🌍';
+    }
+
+    const weatherId = weatherData.weather[0].id;
+
+    if (weatherId >= 200 && weatherId < 300) {
+      return '⛈️'; // Thunderstorm
+    } else if (weatherId >= 300 && weatherId < 500) {
+      return '🌧️'; // Drizzle
+    } else if (weatherId >= 500 && weatherId < 600) {
+      return '🌧️'; // Rain
+    } else if (weatherId >= 600 && weatherId < 700) {
+      return '❄️'; // Snow
+    } else if (weatherId === 800) {
+      return '☀️'; // Clear
+    } else if (weatherId > 800) {
+      return '☁️'; // Clouds
+    } else {
+      return '🌍'; // Default
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setWeatherData(null); // Clear previous weather data
   };
 
   return (
-    <div className="app">
+    <div className={`app ${weatherData && `weather-${weatherData.weather[0].main.toLowerCase()}`}`}>
       <h1>Elvis Weather App</h1>
       <form onSubmit={handleSubmit}>
         <select value={city} onChange={(e) => setCity(e.target.value)}>
@@ -58,6 +82,7 @@ const App = () => {
       {error && <p className="error">{error}</p>}
       {weatherData && (
         <div className="weather-info">
+          <div className="weather-icon">{getWeatherIcon()}</div>
           <h2>{weatherData.name}, {weatherData.sys.country}</h2>
           <p>{weatherData.weather[0].description}</p>
           <p>Temperature: {Math.round(weatherData.main.temp - 273.15)}°C</p>

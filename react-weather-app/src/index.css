@@ -1,58 +1,38 @@
-body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0;
-}
-
-.app {
-  text-align: center;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-form {
-  margin-bottom: 20px;
-}
-
-select {
-  padding: 8px;
-}
-
-button {
-  padding: 8px 16px;
-  cursor: pointer;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-}
-
-button:hover {
-  background-color: #2980b9;
-}
-
-.loading {
-  color: #3498db;
-  margin-top: 10px;
-  animation: spin 1s linear infinite;
-}
-
-.error {
-  color: #e74c3c;
-  margin-top: 10px;
-}
+/* ... (previous styles) */
 
 .weather-info {
   margin-top: 20px;
   animation: fadeIn 0.5s ease-in-out;
+}
+
+.weather-icon {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.weather-clear {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.weather-clouds {
+  background-color: #aeb8c0;
+  color: #333;
+}
+
+.weather-rain {
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+.weather-snow {
+  background-color: #ecf0f1;
+  color: #333;
+}
+
+.weather-sunny {
+  background-color: #f39c12;
+  color: #fff;
 }
 
 @keyframes fadeIn {
@@ -61,11 +41,5 @@ button:hover {
   }
   to {
     opacity: 1;
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
   }
 }
